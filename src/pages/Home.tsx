@@ -243,8 +243,8 @@ export const Home: React.FC = () => {
       </section>
 
       {/* 3. FEATURED PROJECTS */}
-      <section className="bg-luxury-dark py-24 md:py-36 border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-16">
+      <section className="bg-luxury-dark py-24 md:py-36 border-y border-white/5 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 mb-16">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div className="space-y-3">
               <span className="text-xs uppercase tracking-widest text-luxury-gold font-bold">
@@ -262,22 +262,22 @@ export const Home: React.FC = () => {
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </div>
+        </div>
 
-          {/* Project Gallery */}
-          <div 
-            style={{ height: '600px', position: 'relative' }} 
-            className="w-screen relative left-1/2 -translate-x-1/2 overflow-hidden"
-          >
-            <CircularGallery
-              items={galleryItems}
-              bend={1.2}
-              textColor="#ffffff"
-              borderRadius={0.05}
-              scrollEase={0.02}
-              fontUrl="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap"
-              font="bold 20px Orbitron"
-            />
-          </div>
+        {/* Project Gallery */}
+        <div 
+          style={{ height: '600px', position: 'relative' }} 
+          className="w-full"
+        >
+          <CircularGallery
+            items={galleryItems}
+            bend={1.2}
+            textColor="#ffffff"
+            borderRadius={0.05}
+            scrollEase={0.02}
+            fontUrl={i18n.language === 'ar' ? "https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" : "https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap"}
+            font={i18n.language === 'ar' ? "bold 20px Cairo" : "bold 20px Orbitron"}
+          />
         </div>
       </section>
 

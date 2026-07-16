@@ -118,23 +118,45 @@ function getFontSize(font: string) {
 
 function createTextTexture(gl: any, text: string, font = 'bold 30px monospace', color = 'black') {
   const canvas = document.createElement('canvas');
+  const isRtl = document.documentElement.dir === 'rtl';
+  if (isRtl) {
+    canvas.dir = 'rtl';
+  } else {
+    canvas.dir = 'ltr';
+  }
+
   const context = canvas.getContext('2d');
   if (!context) {
     const texture = new Texture(gl, { generateMipmaps: false });
     return { texture, width: 100, height: 50 };
   }
+  
+  if (isRtl) {
+    context.direction = 'rtl';
+  } else {
+    context.direction = 'ltr';
+  }
+  
   context.font = font;
   const metrics = context.measureText(text);
   const textWidth = Math.ceil(metrics.width);
   const textHeight = Math.ceil(getFontSize(font) * 1.2);
   canvas.width = textWidth + 20;
   canvas.height = textHeight + 20;
+  
+  // Canvas width/height reset resets the context, so we must reapply direction & font
   context.font = font;
+  if (isRtl) {
+    context.direction = 'rtl';
+  } else {
+    context.direction = 'ltr';
+  }
   context.fillStyle = color;
   context.textBaseline = 'middle';
   context.textAlign = 'center';
   context.clearRect(0, 0, canvas.width, canvas.height);
   context.fillText(text, canvas.width / 2, canvas.height / 2);
+  
   const texture = new Texture(gl, { generateMipmaps: false });
   texture.image = canvas;
   return { texture, width: canvas.width, height: canvas.height };

@@ -264,15 +264,18 @@ export const Home: React.FC = () => {
           </div>
 
           {/* Project Gallery */}
-          <div style={{ height: '550px', position: 'relative' }} className="w-full overflow-hidden">
+          <div 
+            style={{ height: '600px', position: 'relative' }} 
+            className="w-screen relative left-1/2 -translate-x-1/2 overflow-hidden"
+          >
             <CircularGallery
               items={galleryItems}
-              bend={3}
+              bend={1.2}
               textColor="#ffffff"
               borderRadius={0.05}
               scrollEase={0.02}
               fontUrl="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap"
-              font="bold 24px Orbitron"
+              font="bold 20px Orbitron"
             />
           </div>
         </div>

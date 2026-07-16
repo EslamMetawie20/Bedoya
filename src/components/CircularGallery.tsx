@@ -401,11 +401,18 @@ class Media {
         this.plane.program.uniforms.uViewportSizes.value = [this.viewport.width, this.viewport.height];
       }
     }
-    this.scale = this.screen.height / 1500;
-    this.plane.scale.y = (this.viewport.height * (900 * this.scale)) / this.screen.height;
-    this.plane.scale.x = (this.viewport.width * (700 * this.scale)) / this.screen.width;
+    const isMobile = this.screen.width < 768;
+    
+    // Scale height based on viewport height (responsive)
+    this.plane.scale.y = this.viewport.height * (isMobile ? 0.32 : 0.42);
+    // Keep a fixed 4:5 aspect ratio so cards do not distort or blow up on vertical screens
+    this.plane.scale.x = this.plane.scale.y * 0.8;
+    
     this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
-    this.padding = 2;
+    
+    // Set padding to prevent overlaps (narrower spacing on mobile, wider on desktop)
+    this.padding = isMobile ? 1.8 : 2.5;
+    
     this.width = this.plane.scale.x + this.padding;
     this.widthTotal = this.width * this.length;
     this.x = this.width * this.index;

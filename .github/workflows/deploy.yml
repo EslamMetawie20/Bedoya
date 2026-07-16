@@ -10,14 +10,11 @@ permissions:
   pages: write
   id-token: write
 
-environment:
-  name: github-pages
-  url: https://eslammetawie20.github.io/Bedoya/
-
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-    name: Build, Lint & Deploy
+    environment:
+      name: github-pages
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

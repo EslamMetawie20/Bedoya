@@ -86,7 +86,7 @@ const resources = {
       "contact.phone": "Phone",
       "contact.email": "Email",
       "contact.address": "Address",
-      "contact.address.val": "Damietta, New Damietta City, Egypt",
+      "contact.address.val": "Old Damietta, El Galaa, above Fawry Company, 8th Floor",
 
       "footer.rights": "All rights reserved. Designed for luxury.",
       "footer.tagline": "We build today to make the future.",
@@ -177,7 +177,7 @@ const resources = {
       "contact.phone": "رقم الهاتف",
       "contact.email": "البريد الإلكتروني",
       "contact.address": "العنوان",
-      "contact.address.val": "دمياط، مدينة دمياط الجديدة، جمهورية مصر العربية",
+      "contact.address.val": "دمياط القديمة، الجلاء، أعلى شركة فوري، الدور الثامن",
 
       "footer.rights": "جميع الحقوق محفوظة. صُمم ليعكس الفخامة.",
       "credits.button": "الموقع صمّم بواسطة إسلام مطاوع",

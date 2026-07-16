@@ -94,7 +94,14 @@ export const Footer: React.FC = () => {
             <ul className="space-y-3 text-sm text-luxury-light/60">
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-luxury-gold shrink-0 mt-0.5" />
-                <span>{t('contact.address.val')}</span>
+                <a
+                  href="https://maps.apple/p/4rZ9bMP_6gVjTH"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-luxury-gold transition-colors duration-300"
+                >
+                  {t('contact.address.val')}
+                </a>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-luxury-gold shrink-0" />

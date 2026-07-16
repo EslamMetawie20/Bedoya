@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import { ArrowRight, ArrowUpRight, GraduationCap, Award, Globe, Users } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, GraduationCap, Award, Globe, Users, MapPin } from 'lucide-react';
 import projectsData from '../data/projects.json';
 import { PageTransition } from '../components/PageTransition';
 import { getImageUrl } from '../utils/image';
@@ -497,6 +497,20 @@ export const Home: React.FC = () => {
           <p className="text-sm md:text-base text-luxury-light/60 max-w-xl mx-auto font-light leading-relaxed">
             {t('contact.subtitle')}
           </p>
+
+          <div className="flex flex-col items-center justify-center gap-2 pt-2">
+            <a
+              href="https://maps.apple/p/4rZ9bMP_6gVjTH"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2.5 text-sm md:text-base text-luxury-light/80 hover:text-luxury-gold transition-colors duration-300 leading-relaxed max-w-md mx-auto"
+            >
+              <MapPin className="w-5 h-5 text-luxury-gold shrink-0 transition-transform duration-300 group-hover:scale-110" />
+              <span className="underline underline-offset-4 decoration-luxury-light/25 group-hover:decoration-luxury-gold/50 text-center font-light">
+                {t('contact.address.val')}
+              </span>
+            </a>
+          </div>
 
           <div className="pt-6 flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a

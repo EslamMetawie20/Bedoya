@@ -50,11 +50,7 @@ const Counter: React.FC<{ value: number; suffix?: string }> = ({ value, suffix =
 export const Home: React.FC = () => {
   const { t, i18n } = useTranslation();
   const location = useLocation();
-  const featuredProjects = ['library-room', 'mens-majlis', 'city-facade']
-    .map(id => projectsData.find(p => p.id === id))
-    .filter((p): p is typeof projectsData[0] => !!p);
-
-  const galleryItems = featuredProjects.map(project => ({
+  const galleryItems = projectsData.map(project => ({
     image: getImageUrl(project.renders[0]),
     text: project.title[i18n.language as 'ar' | 'en']
   }));

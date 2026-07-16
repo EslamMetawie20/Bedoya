@@ -459,6 +459,11 @@ class AppClass {
   start = 0;
   raf = 0;
 
+  onItemClick: any;
+  clickStartX = 0;
+  clickStartY = 0;
+  clickStartTime = 0;
+
   boundOnResize: any;
   boundOnWheel: any;
   boundOnTouchDown: any;
@@ -470,6 +475,7 @@ class AppClass {
     container: HTMLElement,
     {
       items,
+      onItemClick,
       bend,
       textColor = '#ffffff',
       borderRadius = 0,
@@ -480,6 +486,7 @@ class AppClass {
   ) {
     document.documentElement.classList.remove('no-js');
     this.container = container;
+    this.onItemClick = onItemClick;
     this.scrollSpeed = scrollSpeed;
     this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
     this.onCheckDebounce = debounce(this.onCheck.bind(this), 200);
@@ -548,7 +555,14 @@ class AppClass {
   onTouchDown(e: any) {
     this.isDown = true;
     this.scroll.position = this.scroll.current;
-    this.start = e.touches ? e.touches[0].clientX : e.clientX;
+    
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    this.start = clientX;
+    
+    this.clickStartTime = performance.now();
+    this.clickStartX = clientX;
+    this.clickStartY = clientY;
   }
   onTouchMove(e: any) {
     if (!this.isDown) return;
@@ -556,9 +570,49 @@ class AppClass {
     const distance = (this.start - x) * (this.scrollSpeed * 0.025);
     this.scroll.target = (this.scroll.position || 0) + distance;
   }
-  onTouchUp() {
+  onTouchUp(e: any) {
     this.isDown = false;
     this.onCheck();
+    
+    // Click detection
+    const clickEndX = e.changedTouches ? e.changedTouches[0].clientX : (e.touches ? e.touches[0]?.clientX : e.clientX);
+    const clickEndY = e.changedTouches ? e.changedTouches[0].clientY : (e.touches ? e.touches[0]?.clientY : e.clientY);
+    
+    const finalX = clickEndX !== undefined ? clickEndX : this.clickStartX;
+    const finalY = clickEndY !== undefined ? clickEndY : this.clickStartY;
+    
+    const clickDuration = performance.now() - this.clickStartTime;
+    const dx = finalX - this.clickStartX;
+    const dy = finalY - this.clickStartY;
+    
+    if (Math.abs(dx) < 12 && Math.abs(dy) < 12 && clickDuration < 300) {
+      this.handleClick(finalX);
+    }
+  }
+  handleClick(clientX: number) {
+    if (!this.onItemClick || !this.medias || this.medias.length === 0) return;
+    
+    const rect = this.container.getBoundingClientRect();
+    const clickX = ((clientX - rect.left) / rect.width) * this.viewport.width - this.viewport.width / 2;
+    
+    let closestMedia: Media | null = null;
+    let minDistance = Infinity;
+    
+    this.medias.forEach(media => {
+      const dist = Math.abs(media.plane.position.x - clickX);
+      if (dist < minDistance) {
+        minDistance = dist;
+        closestMedia = media;
+      }
+    });
+    
+    if (closestMedia) {
+      const mediaWidth = (closestMedia as Media).plane.scale.x;
+      if (minDistance < mediaWidth * 0.8) {
+        const originalItem = this.mediasImages[(closestMedia as Media).index];
+        this.onItemClick(originalItem);
+      }
+    }
   }
   onWheel(e: any) {
     const delta = e.deltaY || e.wheelDelta || e.detail;
@@ -666,7 +720,8 @@ class AppClass {
 }
 
 interface CircularGalleryProps {
-  items?: Array<{ image: string; text: string }>;
+  items?: Array<{ id: string; image: string; text: string } | { image: string; text: string }>;
+  onItemClick?: (item: any) => void;
   bend?: number;
   textColor?: string;
   borderRadius?: number;
@@ -678,6 +733,7 @@ interface CircularGalleryProps {
 
 export default function CircularGallery({
   items,
+  onItemClick,
   bend = 3,
   textColor = '#ffffff',
   borderRadius = 0.05,
@@ -695,6 +751,7 @@ export default function CircularGallery({
       if (!isMounted || !containerRef.current) return;
       app = new AppClass(containerRef.current, {
         items,
+        onItemClick,
         bend,
         textColor,
         borderRadius,
@@ -708,7 +765,7 @@ export default function CircularGallery({
       isMounted = false;
       if (app) app.destroy();
     };
-  }, [items, bend, textColor, borderRadius, font, fontUrl, scrollSpeed, scrollEase]);
+  }, [items, onItemClick, bend, textColor, borderRadius, font, fontUrl, scrollSpeed, scrollEase]);
   
   return (
     <div

@@ -223,5 +223,190 @@
       "/src/assets/projects/mens-majlis/render_4.jpg",
       "/src/assets/projects/mens-majlis/render_5.jpg"
     ]
+  },
+  {
+    "id": "dammam-facade",
+    "title": {
+      "ar": "تصميم واجهة مودرن - الدمام",
+      "en": "Modern Facade Design - Dammam"
+    },
+    "category": {
+      "ar": "التصميم الخارجي والعمارة",
+      "en": "Architecture & Exterior"
+    },
+    "description": {
+      "ar": "تصميم واجهة فيلا سكنية مودرن بمدينة الدمام بالمملكة العربية السعودية، يدمج بين الكتل الخرسانية والزجاج مع إنارة ليلية مبتكرة.",
+      "en": "A modern residential villa facade design in Dammam, Saudi Arabia, combining concrete volumes, glass, and innovative nocturnal lighting."
+    },
+    "details": {
+      "area": "550 m²",
+      "location": {
+        "ar": "الدمام، السعودية",
+        "en": "Dammam, Saudi Arabia"
+      },
+      "year": "2026",
+      "lead": "Yomna Motawe"
+    },
+    "plan": "/src/assets/projects/dammam-facade/plan.png",
+    "renders": [
+      "/src/assets/projects/dammam-facade/render_1.jpg",
+      "/src/assets/projects/dammam-facade/render_2.jpg",
+      "/src/assets/projects/dammam-facade/render_3.jpg"
+    ]
+  },
+  {
+    "id": "classic-modern-buildings",
+    "title": {
+      "ar": "عمارات سكنية - كلاسيك ومودرن",
+      "en": "Residential Buildings - Classic & Modern"
+    },
+    "category": {
+      "ar": "التصميم الخارجي والعمارة",
+      "en": "Architecture & Exterior"
+    },
+    "description": {
+      "ar": "تصميم وتطوير واجهات عمارات سكنية بأساليب تجمع بين الفخامة الكلاسيكية والخطوط المودرن لتقديم معالم معمارية مميزة.",
+      "en": "Design and development of residential building facades combining classical luxury and modern lines to deliver outstanding architectural landmarks."
+    },
+    "details": {
+      "area": "2,800 m²",
+      "location": {
+        "ar": "دمياط، مصر",
+        "en": "Damietta, Egypt"
+      },
+      "year": "2025",
+      "lead": "Yomna Motawe"
+    },
+    "plan": "/src/assets/projects/classic-modern-buildings/plan.png",
+    "renders": [
+      "/src/assets/projects/classic-modern-buildings/render_1.jpg",
+      "/src/assets/projects/classic-modern-buildings/render_2.jpg",
+      "/src/assets/projects/classic-modern-buildings/render_3.jpg",
+      "/src/assets/projects/classic-modern-buildings/render_4.jpg",
+      "/src/assets/projects/classic-modern-buildings/render_5.jpg",
+      "/src/assets/projects/classic-modern-buildings/render_6.jpg"
+    ]
+  },
+  {
+    "id": "andalus-schools",
+    "title": {
+      "ar": "مدارس الأندلس الأهلية",
+      "en": "Al-Andalus Private Schools"
+    },
+    "category": {
+      "ar": "التصميم التعليمي والتطوير",
+      "en": "Educational Design & Development"
+    },
+    "description": {
+      "ar": "التصميم والإشراف الهندسي لمباني مدارس الأندلس الأهلية بمدينة الدمام، مع إدراج مساحات تعليمية وترفيهية متكاملة تواكب أحدث المعايير الدولية.",
+      "en": "Architectural design and engineering supervision for Al-Andalus Private Schools in Dammam, incorporating integrated educational and recreational zones meeting global standards."
+    },
+    "details": {
+      "area": "4,200 m²",
+      "location": {
+        "ar": "الدمام، السعودية",
+        "en": "Dammam, Saudi Arabia"
+      },
+      "year": "2026",
+      "lead": "Yomna Motawe"
+    },
+    "plan": "/src/assets/projects/andalus-schools/plan.png",
+    "renders": [
+      "/src/assets/projects/andalus-schools/render_1.jpg",
+      "/src/assets/projects/andalus-schools/render_2.jpg",
+      "/src/assets/projects/andalus-schools/render_3.jpg",
+      "/src/assets/projects/andalus-schools/render_4.jpg",
+      "/src/assets/projects/andalus-schools/render_5.jpg"
+    ]
+  },
+  {
+    "id": "villa-interior",
+    "title": {
+      "ar": "التصميم الداخلي لفيلا سكنية",
+      "en": "Residential Villa Interior Design"
+    },
+    "category": {
+      "ar": "التصميم الداخلي",
+      "en": "Interior Design"
+    },
+    "description": {
+      "ar": "تصميم داخلي متكامل لفيلا سكنية فاخرة يركز على المساحات المفتوحة، الألوان الدافئة، والتوزيع المدروس للإضاءة لإبراز تفاصيل الرخام والخشب الطبيعي.",
+      "en": "Comprehensive interior design for a luxury residential villa focusing on open-space layouts, warm tones, and detailed lighting highlighting natural marble and wood."
+    },
+    "details": {
+      "area": "380 m²",
+      "location": {
+        "ar": "الرياض، السعودية",
+        "en": "Riyadh, Saudi Arabia"
+      },
+      "year": "2026",
+      "lead": "Yomna Motawe"
+    },
+    "plan": "/src/assets/projects/villa-interior/plan.png",
+    "renders": [
+      "/src/assets/projects/villa-interior/render_1.jpg",
+      "/src/assets/projects/villa-interior/render_2.jpg",
+      "/src/assets/projects/villa-interior/render_3.jpg"
+    ]
+  },
+  {
+    "id": "modern-exterior-facade",
+    "title": {
+      "ar": "تصميم واجهة خارجية مودرن",
+      "en": "Modern Exterior Facade Design"
+    },
+    "category": {
+      "ar": "التصميم الخارجي والعمارة",
+      "en": "Architecture & Exterior"
+    },
+    "description": {
+      "ar": "تصميم واجهة خارجية مودرن لفيلا سكنية تجمع بين الرخام الفاتح والتفاصيل الخشبية الدافئة مع تكوين هندسي معاصر وإضاءة مدمجة.",
+      "en": "A modern exterior facade design for a residential villa, combining light marble, warm wooden details, contemporary geometric composition, and integrated lighting."
+    },
+    "details": {
+      "area": "480 m²",
+      "location": {
+        "ar": "القاهرة، مصر",
+        "en": "Cairo, Egypt"
+      },
+      "year": "2026",
+      "lead": "Yomna Motawe"
+    },
+    "plan": "/src/assets/projects/modern-exterior-facade/plan.png",
+    "renders": [
+      "/src/assets/projects/modern-exterior-facade/render_1.jpg",
+      "/src/assets/projects/modern-exterior-facade/render_2.jpg"
+    ]
+  },
+  {
+    "id": "vlove-shop",
+    "title": {
+      "ar": "تصميم محل VLOVE",
+      "en": "VLOVE Shop Interior Design"
+    },
+    "category": {
+      "ar": "التصميم التجاري والداخلي",
+      "en": "Commercial & Interior"
+    },
+    "description": {
+      "ar": "تصميم داخلي معاصر لمحل تجاري يحمل العلامة التجارية VLOVE، يتميز بتوظيف الألوان الوردية وتفاصيل الإضاءة العصرية لإنشاء تجربة تسوق تفاعلية وجذابة.",
+      "en": "A contemporary interior design for the VLOVE commercial shop, featuring stylish pink color accents and modern light details to deliver an interactive and inviting shopping experience."
+    },
+    "details": {
+      "area": "120 m²",
+      "location": {
+        "ar": "جدة، السعودية",
+        "en": "Jeddah, Saudi Arabia"
+      },
+      "year": "2026",
+      "lead": "Yomna Motawe"
+    },
+    "plan": "/src/assets/projects/vlove-shop/plan.png",
+    "renders": [
+      "/src/assets/projects/vlove-shop/render_1.jpg",
+      "/src/assets/projects/vlove-shop/render_2.jpg",
+      "/src/assets/projects/vlove-shop/render_3.jpg",
+      "/src/assets/projects/vlove-shop/render_4.jpg"
+    ]
   }
 ]

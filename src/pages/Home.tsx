@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, GraduationCap, Award, Globe, Users, MapPin } from 'lucide-react';
 import projectsData from '../data/projects.json';
@@ -50,7 +50,10 @@ const Counter: React.FC<{ value: number; suffix?: string }> = ({ value, suffix =
 export const Home: React.FC = () => {
   const { t, i18n } = useTranslation();
   const location = useLocation();
+  const navigate = useNavigate();
+  
   const galleryItems = projectsData.map(project => ({
+    id: project.id,
     image: getImageUrl(project.renders[0]),
     text: project.title[i18n.language as 'ar' | 'en']
   }));
@@ -208,6 +211,7 @@ export const Home: React.FC = () => {
         >
           <CircularGallery
             items={galleryItems}
+            onItemClick={(item) => navigate(`/projects/${item.id}`)}
             bend={1.2}
             textColor="#ffffff"
             borderRadius={0.05}

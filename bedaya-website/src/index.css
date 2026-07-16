@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Outfit', 'Tajawal', system-ui, -apple-system, sans-serif;
+  --font-outfit: 'Outfit', sans-serif;
+  --font-tajawal: 'Tajawal', sans-serif;
+  
+  --color-luxury-black: #000000;
+  --color-luxury-dark: #0a0b0d;
+  --color-luxury-card: #121316;
+  --color-luxury-navy: #233d4d;
+  --color-luxury-gold: #fe7f2d;
+  --color-luxury-light: #eaecf0;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-luxury-black);
+  }
+  
+  body {
+    background-color: var(--color-luxury-black);
+    color: var(--color-luxury-light);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  html[lang="ar"] {
+    font-family: 'Tajawal', sans-serif;
+  }
+  
+  html[lang="en"] {
+    font-family: 'Outfit', sans-serif;
+  }
+
+  /* Custom high-end scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #000000;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #233d4d;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #fe7f2d;
+  }
+}
+
+/* Custom helper classes */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Glassmorphism effects */
+.glass-nav {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(234, 236, 240, 0.05);
+}
+
+.glass-card {
+  background: rgba(18, 19, 22, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(234, 236, 240, 0.03);
+}
+
+.glass-card:hover {
+  border-color: rgba(254, 127, 45, 0.2);
+}
+
+/* Parallax zoom effect for hero */
+.parallax-bg {
+  transform: translateZ(0);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}

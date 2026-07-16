@@ -54,7 +54,7 @@ export const Projects: React.FC = () => {
               <button
                 key={filter.id}
                 onClick={() => setActiveFilter(filter.id)}
-                className={`px-5 py-2.5 text-xs font-bold uppercase tracking-widest cursor-pointer transition-all duration-300 rounded-none border ${
+                className={`px-5 py-2.5 text-xs font-bold uppercase tracking-widest cursor-pointer transition-all duration-300 rounded-full border ${
                   activeFilter === filter.id
                     ? 'bg-luxury-gold border-luxury-gold text-luxury-black font-semibold'
                     : 'bg-transparent border-white/10 text-luxury-light/75 hover:border-luxury-gold/50 hover:text-luxury-gold'

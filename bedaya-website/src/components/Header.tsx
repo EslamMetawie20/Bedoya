@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Globe } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import logo from '../assets/logo.jpeg';
+import logo from '../assets/brand/logo.png';
 
 export const Header: React.FC = () => {
   const { t, i18n } = useTranslation();
   const location = useLocation();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -43,10 +44,22 @@ export const Header: React.FC = () => {
   const handleNavClick = (path: string) => {
     if (path.startsWith('/#')) {
       const id = path.replace('/#', '');
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+      
+      if (location.pathname !== '/') {
+        navigate('/', { state: { scrollToId: id } });
+      } else {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
       }
+    }
+  };
+
+  const handleHomeClick = (e: React.MouseEvent) => {
+    if (location.pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -60,21 +73,15 @@ export const Header: React.FC = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-          {/* Logo Section */}
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link to="/" onClick={handleHomeClick} className="flex items-center group">
             <img
               src={logo}
               alt="Bedaya Logo"
-              className="h-10 md:h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+              style={{
+                filter: 'drop-shadow(0 0 10px rgba(254, 127, 45, 0.45)) drop-shadow(0 0 2px rgba(254, 127, 45, 0.25))'
+              }}
+              className="h-10 md:h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-102"
             />
-            <div className="flex flex-col border-s border-luxury-light/10 ps-3">
-              <span className="font-outfit text-sm md:text-base font-bold tracking-widest text-luxury-light">
-                BEDAYA
-              </span>
-              <span className="text-[9px] text-luxury-gold tracking-widest uppercase">
-                {i18n.language === 'ar' ? 'للمقاولات والتطوير' : 'Constructions'}
-              </span>
-            </div>
           </Link>
 
           {/* Desktop Nav */}
@@ -91,6 +98,7 @@ export const Header: React.FC = () => {
                 ) : (
                   <Link
                     to={item.path}
+                    onClick={item.path === '/' ? handleHomeClick : undefined}
                     className={`font-sans text-xs lg:text-sm uppercase tracking-widest transition-colors duration-300 font-medium ${
                       location.pathname === item.path
                         ? 'text-luxury-gold'
@@ -106,20 +114,20 @@ export const Header: React.FC = () => {
             {/* Language Switcher */}
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-2 px-4 py-2 border border-luxury-light/15 hover:border-luxury-gold/40 rounded-none bg-transparent text-luxury-light text-xs font-semibold uppercase tracking-widest cursor-pointer transition-all duration-300"
+              className="flex items-center gap-2 px-4 py-2 border border-luxury-light/15 hover:border-luxury-gold/40 rounded-full bg-transparent text-luxury-light text-xs font-semibold uppercase tracking-widest cursor-pointer transition-all duration-300"
             >
-              <Globe className="w-3.5 h-3.5" />
+              <span className="text-lg leading-none">{i18n.language === 'ar' ? '🇬🇧' : '🇸🇦'}</span>
               <span>{i18n.language === 'ar' ? 'English' : 'عربي'}</span>
             </button>
           </nav>
-
+ 
           {/* Mobile Menu Trigger */}
           <div className="flex items-center gap-4 md:hidden">
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-1 p-1.5 border border-luxury-light/15 rounded-none text-luxury-light text-[10px] uppercase font-bold tracking-wider cursor-pointer"
+              className="flex items-center gap-1.5 px-2.5 py-1 border border-luxury-light/15 rounded-full text-luxury-light text-[10px] uppercase font-bold tracking-wider cursor-pointer"
             >
-              <Globe className="w-3 h-3" />
+              <span className="text-base leading-none">{i18n.language === 'ar' ? '🇬🇧' : '🇸🇦'}</span>
               <span>{i18n.language === 'ar' ? 'EN' : 'عربي'}</span>
             </button>
 
@@ -166,7 +174,12 @@ export const Header: React.FC = () => {
                   ) : (
                     <Link
                       to={item.path}
-                      onClick={() => setIsOpen(false)}
+                      onClick={(e) => {
+                        setIsOpen(false);
+                        if (item.path === '/') {
+                          handleHomeClick(e);
+                        }
+                      }}
                       className={`text-2xl font-bold tracking-widest uppercase ${
                         location.pathname === item.path
                           ? 'text-luxury-gold'

@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import { ArrowRight, Hammer, Paintbrush, Building, ArrowUpRight, GraduationCap } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, GraduationCap, Award, Globe, Users } from 'lucide-react';
 import projectsData from '../data/projects.json';
 import { PageTransition } from '../components/PageTransition';
 import { getImageUrl } from '../utils/image';
@@ -48,7 +48,23 @@ const Counter: React.FC<{ value: number; suffix?: string }> = ({ value, suffix =
 
 export const Home: React.FC = () => {
   const { t, i18n } = useTranslation();
-  const featuredProjects = projectsData.slice(0, 3); // Showcase first 3 projects
+  const location = useLocation();
+  const featuredProjects = ['library-room', 'mens-majlis', 'city-facade']
+    .map(id => projectsData.find(p => p.id === id))
+    .filter((p): p is typeof projectsData[0] => !!p);
+
+  useEffect(() => {
+    if (location.state && (location.state as any).scrollToId) {
+      const id = (location.state as any).scrollToId;
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 150);
+      }
+      window.history.replaceState({}, document.title);
+    }
+  }, [location]);
 
   // Hero Parallax Scroll
   const heroRef = useRef<HTMLDivElement>(null);
@@ -89,7 +105,7 @@ export const Home: React.FC = () => {
         {/* Background Image Parallax */}
         <motion.div
           style={{ y: heroBgY, scale: heroScale, opacity: heroOpacity, backgroundImage: `url(${getImageUrl('/src/assets/projects/city-facade/render_1.jpg')})` }}
-          className="absolute inset-0 z-0 bg-cover bg-[center_30%] md:bg-[center_25%] lg:bg-[center_20%] brightness-[0.4]"
+          className="absolute inset-0 z-0 bg-cover bg-[center_58%] md:bg-[center_55%] lg:bg-[center_50%] brightness-[0.4]"
         />
 
         <div className="absolute inset-0 bg-gradient-to-t from-luxury-black via-transparent to-black/50 z-1" />
@@ -138,38 +154,28 @@ export const Home: React.FC = () => {
             {t('hero.subtitle')}
           </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col sm:flex-row gap-4 justify-center pt-6"
-          >
-            <Link
-              to="/projects"
-              className="px-8 py-3.5 bg-luxury-gold text-luxury-black font-semibold text-sm uppercase tracking-widest hover:bg-white hover:text-luxury-black transition-all duration-300 rounded-none shadow-lg shadow-luxury-gold/10"
-            >
-              {t('hero.cta')}
-            </Link>
-            <a
-              href="#contact"
-              className="px-8 py-3.5 border border-white/20 text-white font-semibold text-sm uppercase tracking-widest hover:border-luxury-gold hover:text-luxury-gold transition-all duration-300 rounded-none"
-            >
-              {t('contact.btn')}
-            </a>
-          </motion.div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
-          <span className="text-[10px] uppercase tracking-widest text-white/40 font-outfit">
-            {t('hero.scroll')}
-          </span>
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-            className="w-1 h-3 bg-luxury-gold/60 rounded-full"
-          />
-        </div>
+        {/* Hero CTA buttons at the absolute bottom of Hero */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col sm:flex-row gap-4 justify-center items-center w-[90vw] max-w-[500px] sm:max-w-none"
+        >
+          <Link
+            to="/projects"
+            className="w-full sm:w-auto px-8 py-3.5 bg-luxury-gold text-luxury-black font-semibold text-sm uppercase tracking-widest hover:bg-white hover:text-luxury-black transition-all duration-300 rounded-full shadow-lg shadow-luxury-gold/10 text-center"
+          >
+            {t('hero.cta')}
+          </Link>
+          <a
+            href="#contact"
+            className="w-full sm:w-auto px-8 py-3.5 border border-white/20 text-white font-semibold text-sm uppercase tracking-widest hover:border-luxury-gold hover:text-luxury-gold transition-all duration-300 rounded-full text-center"
+          >
+            {t('contact.btn')}
+          </a>
+        </motion.div>
       </div>
 
       {/* 2. COMPANY INTRODUCTION */}
@@ -212,18 +218,18 @@ export const Home: React.FC = () => {
           <div className="relative">
             <div className="aspect-[4/5] overflow-hidden bg-luxury-dark border border-white/5 shadow-2xl relative group">
               <img
-                src={getImageUrl("/src/assets/projects/mens-majlis/render_1.jpg")}
-                alt="Bedaya Interior Renders"
+                src={getImageUrl("/src/assets/projects/city-facade/render_2.jpg")}
+                alt="Bedaya Exterior Architecture"
                 className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-luxury-black/60 to-transparent" />
               <div className="absolute bottom-6 left-6 right-6">
                 <p className="text-xs text-luxury-gold uppercase tracking-widest font-bold font-outfit mb-1">
-                  {i18n.language === 'ar' ? 'تصميم داخلي معاصر' : 'Contemporary Interior Design'}
+                  {i18n.language === 'ar' ? 'العمارة الخارجية والتطوير العقاري' : 'Exterior Architecture & Development'}
                 </p>
                 <p className="text-base text-white font-medium">
-                  {i18n.language === 'ar' ? 'مجلس رجال رسمي - الخبرة والفخامة' : 'Official Men\'s Majlis Showcase'}
+                  {i18n.language === 'ar' ? 'واجهة مشروع المدينة - المعلم الحضري' : 'City Project Facade Landmark'}
                 </p>
               </div>
             </div>
@@ -245,7 +251,7 @@ export const Home: React.FC = () => {
             </div>
             <Link
               to="/projects"
-              className="inline-flex items-center gap-2 group text-luxury-light hover:text-luxury-gold transition-colors duration-300 uppercase tracking-widest text-xs font-bold font-outfit"
+              className="px-6 py-2.5 border border-white/10 text-luxury-light hover:border-luxury-gold hover:text-luxury-gold transition-all duration-300 uppercase tracking-widest text-xs font-bold font-outfit rounded-full inline-flex items-center gap-2 group hover:bg-luxury-gold/5 shrink-0"
             >
               <span>{i18n.language === 'ar' ? 'مشاهدة كافة المشاريع' : 'View All Projects'}</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -263,7 +269,7 @@ export const Home: React.FC = () => {
                 transition={{ duration: 0.8, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
                 className="group relative flex flex-col bg-luxury-black overflow-hidden border border-white/5 shadow-2xl"
               >
-                <div className="aspect-[3/4] w-full overflow-hidden bg-neutral-900 relative">
+                <div className="aspect-[4/3] w-full overflow-hidden bg-neutral-900 relative">
                   <img
                     src={getImageUrl(project.renders[0])}
                     alt={project.title[i18n.language as 'ar' | 'en']}
@@ -321,40 +327,55 @@ export const Home: React.FC = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="glass-card p-8 md:p-12 space-y-6 flex flex-col justify-between">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="glass-card p-8 md:p-10 space-y-6 flex flex-col justify-between">
               <div className="space-y-6">
-                <div className="w-12 h-12 bg-luxury-gold/10 border border-luxury-gold/30 flex items-center justify-center text-luxury-gold">
-                  <Hammer className="w-6 h-6" />
+                <div className="w-12 h-12 bg-luxury-gold/10 border border-luxury-gold/30 flex items-center justify-center text-luxury-gold rounded-full">
+                  <Award className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl md:text-2xl font-light text-white">{t('services.s1.title')}</h3>
-                <p className="text-sm text-luxury-light/50 font-light leading-relaxed">
-                  {t('services.s1.desc')}
-                </p>
+                <ul className="space-y-3 text-xs md:text-sm text-luxury-light/60 font-light leading-relaxed">
+                  {[1, 2, 3, 4, 5, 6].map(i => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="text-luxury-gold shrink-0">✦</span>
+                      <span>{t(`services.s1.i${i}`)}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
 
-            <div className="glass-card p-8 md:p-12 space-y-6 flex flex-col justify-between">
+            <div className="glass-card p-8 md:p-10 space-y-6 flex flex-col justify-between">
               <div className="space-y-6">
-                <div className="w-12 h-12 bg-luxury-gold/10 border border-luxury-gold/30 flex items-center justify-center text-luxury-gold">
-                  <Paintbrush className="w-6 h-6" />
+                <div className="w-12 h-12 bg-luxury-gold/10 border border-luxury-gold/30 flex items-center justify-center text-luxury-gold rounded-full">
+                  <Globe className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl md:text-2xl font-light text-white">{t('services.s2.title')}</h3>
-                <p className="text-sm text-luxury-light/50 font-light leading-relaxed">
-                  {t('services.s2.desc')}
-                </p>
+                <ul className="space-y-4 text-xs md:text-sm text-luxury-light/60 font-light leading-relaxed">
+                  {[1, 2, 3].map(i => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="text-luxury-gold shrink-0">✦</span>
+                      <span>{t(`services.s2.i${i}`)}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
 
-            <div className="glass-card p-8 md:p-12 space-y-6 flex flex-col justify-between">
+            <div className="glass-card p-8 md:p-10 space-y-6 flex flex-col justify-between border-t border-t-luxury-gold/30">
               <div className="space-y-6">
-                <div className="w-12 h-12 bg-luxury-gold/10 border border-luxury-gold/30 flex items-center justify-center text-luxury-gold">
-                  <Building className="w-6 h-6" />
+                <div className="w-12 h-12 bg-luxury-gold/10 border border-luxury-gold/30 flex items-center justify-center text-luxury-gold rounded-full">
+                  <Users className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl md:text-2xl font-light text-white">{t('services.s3.title')}</h3>
-                <p className="text-sm text-luxury-light/50 font-light leading-relaxed">
+                <p className="text-xs md:text-sm text-luxury-light/65 font-light leading-relaxed">
                   {t('services.s3.desc')}
                 </p>
+                <div className="border-t border-white/5 pt-6 mt-6">
+                  <p className="text-xs text-luxury-gold uppercase tracking-widest font-bold font-outfit">
+                    {i18n.language === 'ar' ? 'الجودة والدقة والاحترافية' : 'Quality, Precision & Professionalism'}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -421,7 +442,7 @@ export const Home: React.FC = () => {
                   href="https://www.behance.net/yomnamotawe"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-luxury-navy hover:bg-luxury-gold text-white hover:text-luxury-black font-semibold text-sm uppercase tracking-widest transition-all duration-300 rounded-none shadow-lg group cursor-pointer"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-luxury-navy hover:bg-luxury-gold text-white hover:text-luxury-black font-semibold text-sm uppercase tracking-widest transition-all duration-300 rounded-full shadow-lg group cursor-pointer"
                 >
                   <span>{t('director.behance')}</span>
                   <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -480,14 +501,14 @@ export const Home: React.FC = () => {
           <div className="pt-6 flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
               href="mailto:yomnamotawe@gmail.com"
-              className="px-8 py-3.5 bg-white text-luxury-black font-semibold text-sm tracking-widest hover:bg-luxury-gold hover:text-luxury-black transition-all duration-300 rounded-none shadow-lg shadow-white/5 cursor-pointer"
+              className="px-8 py-3.5 bg-white text-luxury-black font-semibold text-sm tracking-widest hover:bg-luxury-gold hover:text-luxury-black transition-all duration-300 rounded-full shadow-lg shadow-white/5 cursor-pointer"
             >
               yomnamotawe@gmail.com
             </a>
             <a
               href="tel:+201015833927"
               dir="ltr"
-              className="px-8 py-3.5 border border-white/20 text-white font-semibold text-sm uppercase tracking-widest hover:border-luxury-gold hover:text-luxury-gold transition-all duration-300 rounded-none cursor-pointer"
+              className="px-8 py-3.5 border border-white/20 text-white font-semibold text-sm uppercase tracking-widest hover:border-luxury-gold hover:text-luxury-gold transition-all duration-300 rounded-full cursor-pointer"
             >
               +20 101 583 3927
             </a>

@@ -102,9 +102,8 @@ export const Home: React.FC = () => {
     <PageTransition>
       {/* 1. CINEMATIC HERO */}
       <div ref={heroRef} className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black">
-        {/* Background Image Parallax */}
         <motion.div
-          style={{ y: heroBgY, scale: heroScale, opacity: heroOpacity, backgroundImage: `url(${getImageUrl('/src/assets/projects/city-facade/render_1.jpg')})` }}
+          style={{ y: heroBgY, scale: heroScale, opacity: heroOpacity, backgroundImage: `url(${getImageUrl('/src/assets/projects/city-facade/hero_andalus.jpg')})` }}
           className="absolute inset-0 z-0 bg-cover bg-[center_58%] md:bg-[center_55%] lg:bg-[center_50%] brightness-[0.4]"
         />
 

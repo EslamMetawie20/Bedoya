@@ -179,7 +179,46 @@ export const Home: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* 2. COMPANY INTRODUCTION */}
+      {/* 2. FEATURED PROJECTS */}
+      <section className="bg-luxury-dark py-24 md:py-36 border-y border-white/5 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 mb-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="space-y-3">
+              <span className="text-xs uppercase tracking-widest text-luxury-gold font-bold">
+                {t('projects.badge')}
+              </span>
+              <h2 className="text-3xl md:text-5xl font-light tracking-tight text-white leading-tight">
+                {t('projects.title')}
+              </h2>
+            </div>
+            <Link
+              to="/projects"
+              className="px-6 py-2.5 border border-white/10 text-luxury-light hover:border-luxury-gold hover:text-luxury-gold transition-all duration-300 uppercase tracking-widest text-xs font-bold font-outfit rounded-full inline-flex items-center gap-2 group hover:bg-luxury-gold/5 shrink-0"
+            >
+              <span>{i18n.language === 'ar' ? 'مشاهدة كافة المشاريع' : 'View All Projects'}</span>
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Project Gallery */}
+        <div 
+          style={{ height: '600px', position: 'relative' }} 
+          className="w-full"
+        >
+          <CircularGallery
+            items={galleryItems}
+            bend={1.2}
+            textColor="#ffffff"
+            borderRadius={0.05}
+            scrollEase={0.02}
+            fontUrl={i18n.language === 'ar' ? "https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" : "https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap"}
+            font={i18n.language === 'ar' ? "bold 20px Cairo" : "bold 20px Orbitron"}
+          />
+        </div>
+      </section>
+
+      {/* 3. COMPANY INTRODUCTION */}
       <section id="about" className="relative bg-luxury-black py-24 md:py-36 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Text Section */}
@@ -235,45 +274,6 @@ export const Home: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* 3. FEATURED PROJECTS */}
-      <section className="bg-luxury-dark py-24 md:py-36 border-y border-white/5 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 mb-16">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div className="space-y-3">
-              <span className="text-xs uppercase tracking-widest text-luxury-gold font-bold">
-                {t('projects.badge')}
-              </span>
-              <h2 className="text-3xl md:text-5xl font-light tracking-tight text-white leading-tight">
-                {t('projects.title')}
-              </h2>
-            </div>
-            <Link
-              to="/projects"
-              className="px-6 py-2.5 border border-white/10 text-luxury-light hover:border-luxury-gold hover:text-luxury-gold transition-all duration-300 uppercase tracking-widest text-xs font-bold font-outfit rounded-full inline-flex items-center gap-2 group hover:bg-luxury-gold/5 shrink-0"
-            >
-              <span>{i18n.language === 'ar' ? 'مشاهدة كافة المشاريع' : 'View All Projects'}</span>
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-          </div>
-        </div>
-
-        {/* Project Gallery */}
-        <div 
-          style={{ height: '600px', position: 'relative' }} 
-          className="w-full"
-        >
-          <CircularGallery
-            items={galleryItems}
-            bend={1.2}
-            textColor="#ffffff"
-            borderRadius={0.05}
-            scrollEase={0.02}
-            fontUrl={i18n.language === 'ar' ? "https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" : "https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap"}
-            font={i18n.language === 'ar' ? "bold 20px Cairo" : "bold 20px Orbitron"}
-          />
         </div>
       </section>
 

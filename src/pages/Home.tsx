@@ -476,10 +476,10 @@ export const Home: React.FC = () => {
 
           <div className="pt-6 flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
-              href="mailto:yomnamotawe@gmail.com"
+              href="mailto:bidayaconstructions@gmail.com"
               className="px-8 py-3.5 bg-white text-luxury-black font-semibold text-sm tracking-widest hover:bg-luxury-gold hover:text-luxury-black transition-all duration-300 rounded-full shadow-lg shadow-white/5 cursor-pointer"
             >
-              yomnamotawe@gmail.com
+              bidayaconstructions@gmail.com
             </a>
             <a
               href="tel:+201015833927"

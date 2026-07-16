@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { ArrowUp, Mail, Phone, MapPin, MessageSquare, X } from 'lucide-react';
+import { ArrowUp, Mail, Phone, MapPin, MessageSquare, X, Copy, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../assets/brand/logo.png';
 
 export const Footer: React.FC = () => {
   const { t, i18n } = useTranslation();
   const [isCreditsOpen, setIsCreditsOpen] = useState(false);
+  const [copiedField, setCopiedField] = useState<string | null>(null);
+
+  const copyToClipboard = (text: string, field: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedField(field);
+    setTimeout(() => setCopiedField(null), 2000);
+  };
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -74,7 +81,7 @@ export const Footer: React.FC = () => {
                 onClick={() => setIsCreditsOpen(true)}
                 className="hover:text-luxury-gold transition-colors duration-300 font-sans cursor-pointer text-start block py-1 font-light"
               >
-                Website designed by Eslam Metawie
+                {t('credits.button')}
               </button>
             </div>
           </div>
@@ -146,53 +153,69 @@ export const Footer: React.FC = () => {
 
               <div className="space-y-4">
                 <span className="text-[10px] uppercase tracking-widest text-luxury-gold font-bold font-outfit">
-                  {i18n.language === 'ar' ? 'مطوّر ومصمم الموقع' : 'Designed & Developed by'}
+                  {t('credits.badge')}
                 </span>
                 <div className="space-y-1">
                   <h3 className="text-2xl font-light text-white tracking-wide">
-                    Eslam Metawie
+                    {t('credits.name')}
                   </h3>
                   <p className="text-[10px] uppercase tracking-wider text-luxury-gold/80 font-medium font-outfit">
-                    Software Engineer | Full-Stack Web Developer
+                    {t('credits.role')}
                   </p>
                 </div>
-                
-                <p className="text-sm text-luxury-light/60 font-sans leading-relaxed font-light text-start pt-4 border-t border-white/5">
-                  I build modern, high-performance, scalable web applications with a strong focus on clean architecture, user experience, and responsive design.
-                </p>
 
                 <div className="space-y-4 pt-4 text-sm text-luxury-light/70 text-start">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-luxury-gold/5 border border-luxury-gold/20 flex items-center justify-center text-luxury-gold">
+                    <div className="w-8 h-8 rounded-full bg-luxury-gold/5 border border-luxury-gold/20 flex items-center justify-center text-luxury-gold shrink-0">
                       <Mail className="w-4 h-4" />
                     </div>
-                    <div>
-                      <p className="text-[10px] uppercase tracking-wider text-luxury-light/40">Email</p>
-                      <motion.a
-                        href="mailto:eslammetawie50@gmail.com"
-                        whileHover={{ y: -1 }}
-                        className="hover:text-luxury-gold transition-colors font-sans block"
-                      >
-                        eslammetawie50@gmail.com
-                      </motion.a>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[10px] uppercase tracking-wider text-luxury-light/40">{t('credits.email_label')}</p>
+                      <div className="flex items-center gap-2">
+                        <motion.a
+                          href="mailto:eslammetawie50@gmail.com"
+                          whileHover={{ y: -1 }}
+                          className="hover:text-luxury-gold transition-colors font-sans block truncate"
+                          dir="ltr"
+                        >
+                          eslammetawie50@gmail.com
+                        </motion.a>
+                        <button
+                          onClick={() => copyToClipboard('eslammetawie50@gmail.com', 'email')}
+                          className="shrink-0 text-luxury-light/30 hover:text-luxury-gold transition-colors duration-300 cursor-pointer"
+                          aria-label="Copy email"
+                        >
+                          {copiedField === 'email' ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5" />}
+                        </button>
+                      </div>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-luxury-gold/5 border border-luxury-gold/20 flex items-center justify-center text-luxury-gold">
+                    <div className="w-8 h-8 rounded-full bg-luxury-gold/5 border border-luxury-gold/20 flex items-center justify-center text-luxury-gold shrink-0">
                       <MessageSquare className="w-4 h-4" />
                     </div>
-                    <div>
-                      <p className="text-[10px] uppercase tracking-wider text-luxury-light/40">WhatsApp</p>
-                      <motion.a
-                        href="https://wa.me/4917660370276"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ y: -1 }}
-                        className="hover:text-luxury-gold transition-colors font-sans block"
-                      >
-                        +49 176 60370276
-                      </motion.a>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[10px] uppercase tracking-wider text-luxury-light/40">{t('credits.whatsapp_label')}</p>
+                      <div className="flex items-center gap-2">
+                        <motion.a
+                          href="https://wa.me/4917660370276"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{ y: -1 }}
+                          className="hover:text-luxury-gold transition-colors font-sans block"
+                          dir="ltr"
+                        >
+                          +49 176 60370276
+                        </motion.a>
+                        <button
+                          onClick={() => copyToClipboard('+4917660370276', 'whatsapp')}
+                          className="shrink-0 text-luxury-light/30 hover:text-luxury-gold transition-colors duration-300 cursor-pointer"
+                          aria-label="Copy WhatsApp number"
+                        >
+                          {copiedField === 'whatsapp' ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5" />}
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -89,7 +89,13 @@ const resources = {
       "contact.address.val": "Damietta, New Damietta City, Egypt",
 
       "footer.rights": "All rights reserved. Designed for luxury.",
-      "footer.tagline": "We build today to make the future."
+      "footer.tagline": "We build today to make the future.",
+      "credits.button": "Website designed by Eslam Metawie",
+      "credits.badge": "Designed & Developed by",
+      "credits.name": "Eslam Metawie",
+      "credits.role": "Software Engineer | Full-Stack Web Developer",
+      "credits.email_label": "Email",
+      "credits.whatsapp_label": "WhatsApp"
     }
   },
   ar: {
@@ -174,6 +180,12 @@ const resources = {
       "contact.address.val": "دمياط، مدينة دمياط الجديدة، جمهورية مصر العربية",
 
       "footer.rights": "جميع الحقوق محفوظة. صُمم ليعكس الفخامة.",
+      "credits.button": "الموقع صمّم بواسطة إسلام مطاوع",
+      "credits.badge": "مطوّر ومصمم الموقع",
+      "credits.name": "إسلام مطاوع",
+      "credits.role": "مهندس برمجيات | مطوّر ويب متكامل",
+      "credits.email_label": "البريد الإلكتروني",
+      "credits.whatsapp_label": "واتساب",
       "footer.tagline": "بداية... نبني اليوم لنصنع المستقبل."
     }
   }

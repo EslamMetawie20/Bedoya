@@ -8,7 +8,7 @@ import { PageTransition } from '../components/PageTransition';
 import CircularGallery from '../components/CircularGallery';
 import { getImageUrl } from '../utils/image';
 import heroLogo from '../assets/brand/logo.png';
-import yomnaAvatar from '../assets/brand/yomna.png';
+import { ProjectShowcase } from '../components/ProjectShowcase';
 
 // Reusable Counter component using requestAnimationFrame for smooth luxury numbers
 const Counter: React.FC<{ value: number; suffix?: string }> = ({ value, suffix = "" }) => {
@@ -416,34 +416,9 @@ export const Home: React.FC = () => {
               </div>
             </div>
 
-            {/* Graphics Backdrop representing Architect Work */}
+            {/* Graphics Showcase of Projects */}
             <div className="lg:col-span-5 relative flex justify-center">
-              <div className="w-full max-w-[340px] aspect-[1/1] rounded-full border border-luxury-gold/25 relative flex items-center justify-center p-6 group overflow-hidden">
-                {/* Profile Avatar Background */}
-                <div 
-                  className="absolute inset-0 bg-cover bg-center rounded-full group-hover:scale-105 transition-transform duration-700 pointer-events-none" 
-                  style={{ backgroundImage: `url(${yomnaAvatar})` }} 
-                />
-                
-                {/* Luxury Dark Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-luxury-black via-luxury-black/70 to-luxury-black/35 rounded-full" />
-                
-                {/* Pulse background glow */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-luxury-gold/5 via-transparent to-transparent animate-pulse rounded-full pointer-events-none" />
-                
-                {/* Rotating drafting circular lines representing Architecture */}
-                <div className="absolute inset-2 rounded-full border border-dashed border-luxury-light/10 animate-spin" style={{ animationDuration: '60s' }} />
-                <div className="absolute inset-8 rounded-full border border-luxury-light/5 animate-spin" style={{ animationDuration: '40s', animationDirection: 'reverse' }} />
-                
-                <div className="relative text-center space-y-4 z-10">
-                  <span className="font-outfit text-[11px] uppercase tracking-widest text-luxury-gold font-bold">
-                    Portfolio Creative Design
-                  </span>
-                  <p className="text-xs text-luxury-light/50 max-w-[200px] leading-relaxed">
-                    {i18n.language === 'ar' ? 'مخططات تفصيلية وحلول إنشائية فاخرة تلائم المستقبل.' : 'Bespoke conceptualizations & executive spatial details.'}
-                  </p>
-                </div>
-              </div>
+              <ProjectShowcase />
             </div>
           </div>
         </div>

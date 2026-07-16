@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, GraduationCap, Award, Globe, Users, MapPin } from 'lucide-react';
 import projectsData from '../data/projects.json';
 import { PageTransition } from '../components/PageTransition';
+import CircularGallery from '../components/CircularGallery';
 import { getImageUrl } from '../utils/image';
 import heroLogo from '../assets/brand/logo.png';
 import yomnaAvatar from '../assets/brand/yomna.png';
@@ -52,6 +53,11 @@ export const Home: React.FC = () => {
   const featuredProjects = ['library-room', 'mens-majlis', 'city-facade']
     .map(id => projectsData.find(p => p.id === id))
     .filter((p): p is typeof projectsData[0] => !!p);
+
+  const galleryItems = featuredProjects.map(project => ({
+    image: getImageUrl(project.renders[0]),
+    text: project.title[i18n.language as 'ar' | 'en']
+  }));
 
   useEffect(() => {
     if (location.state && (location.state as any).scrollToId) {
@@ -257,59 +263,17 @@ export const Home: React.FC = () => {
             </Link>
           </div>
 
-          {/* Project Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredProjects.map((project, idx) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative flex flex-col bg-luxury-black overflow-hidden border border-white/5 shadow-2xl"
-              >
-                <div className="aspect-[4/3] w-full overflow-hidden bg-neutral-900 relative">
-                  <img
-                    src={getImageUrl(project.renders[0])}
-                    alt={project.title[i18n.language as 'ar' | 'en']}
-                    className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-luxury-black/85 via-black/10 to-transparent opacity-90 group-hover:opacity-95 transition-opacity duration-300" />
-                  
-                  {/* Hover icon details */}
-                  <Link
-                    to={`/projects/${project.id}`}
-                    className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40 backdrop-blur-[2px]"
-                  >
-                    <div className="w-12 h-12 rounded-full border border-luxury-gold/50 flex items-center justify-center text-luxury-gold bg-black/60 scale-90 group-hover:scale-100 transition-transform duration-300">
-                      <ArrowUpRight className="w-5 h-5" />
-                    </div>
-                  </Link>
-                </div>
-
-                <div className="p-6 md:p-8 space-y-3 z-10 bg-luxury-black">
-                  <span className="text-[10px] uppercase tracking-widest text-luxury-gold font-bold">
-                    {project.category[i18n.language as 'ar' | 'en']}
-                  </span>
-                  <h3 className="text-xl font-light text-white tracking-tight">
-                    {project.title[i18n.language as 'ar' | 'en']}
-                  </h3>
-                  <p className="text-xs md:text-sm text-luxury-light/50 font-light leading-relaxed line-clamp-2">
-                    {project.description[i18n.language as 'ar' | 'en']}
-                  </p>
-                  <div className="pt-2">
-                    <Link
-                      to={`/projects/${project.id}`}
-                      className="text-xs text-white group-hover:text-luxury-gold font-bold uppercase tracking-widest transition-colors duration-300 inline-flex items-center gap-1.5"
-                    >
-                      <span>{t('projects.view_details')}</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          {/* Project Gallery */}
+          <div style={{ height: '550px', position: 'relative' }} className="w-full overflow-hidden">
+            <CircularGallery
+              items={galleryItems}
+              bend={3}
+              textColor="#ffffff"
+              borderRadius={0.05}
+              scrollEase={0.02}
+              fontUrl="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap"
+              font="bold 24px Orbitron"
+            />
           </div>
         </div>
       </section>

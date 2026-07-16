@@ -186,7 +186,6 @@
     },
     "plan": "/src/assets/projects/city-facade/plan.png",
     "renders": [
-      "/src/assets/projects/city-facade/render_1.jpg",
       "/src/assets/projects/city-facade/render_2.jpg",
       "/src/assets/projects/city-facade/render_3.jpg",
       "/src/assets/projects/city-facade/render_4.jpg"

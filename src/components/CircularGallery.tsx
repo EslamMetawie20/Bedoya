@@ -433,7 +433,7 @@ class Media {
     this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
     
     // Set padding to prevent overlaps (narrower spacing on mobile, wider on desktop)
-    this.padding = isMobile ? 1.8 : 2.5;
+    this.padding = isMobile ? 0.55 : 2.5;
     
     this.width = this.plane.scale.x + this.padding;
     this.widthTotal = this.width * this.length;

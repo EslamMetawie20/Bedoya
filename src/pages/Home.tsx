@@ -52,6 +52,15 @@ export const Home: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const galleryItems = projectsData.map(project => ({
     id: project.id,
     image: getImageUrl(project.renders[0]),
@@ -212,7 +221,7 @@ export const Home: React.FC = () => {
           <CircularGallery
             items={galleryItems}
             onItemClick={(item) => navigate(`/projects/${item.id}`)}
-            bend={1.2}
+            bend={isMobile ? 0.3 : 1.2}
             textColor="#ffffff"
             borderRadius={0.05}
             scrollEase={0.02}
@@ -262,7 +271,7 @@ export const Home: React.FC = () => {
           <div className="relative">
             <div className="aspect-[4/5] overflow-hidden bg-luxury-dark border border-white/5 shadow-2xl relative group">
               <img
-                src={getImageUrl("/src/assets/projects/city-facade/render_2.jpg")}
+                src={getImageUrl("/src/assets/projects/city-facade/render_3.jpg")}
                 alt="Bedaya Exterior Architecture"
                 className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105"
                 loading="lazy"

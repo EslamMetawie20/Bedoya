@@ -7,6 +7,7 @@ import projectsData from '../data/projects.json';
 import { PageTransition } from '../components/PageTransition';
 import { getImageUrl } from '../utils/image';
 import heroLogo from '../assets/brand/logo.png';
+import yomnaAvatar from '../assets/brand/yomna.png';
 
 // Reusable Counter component using requestAnimationFrame for smooth luxury numbers
 const Counter: React.FC<{ value: number; suffix?: string }> = ({ value, suffix = "" }) => {
@@ -431,13 +432,23 @@ export const Home: React.FC = () => {
             {/* Graphics Backdrop representing Architect Work */}
             <div className="lg:col-span-5 relative flex justify-center">
               <div className="w-full max-w-[340px] aspect-[1/1] rounded-full border border-luxury-gold/25 relative flex items-center justify-center p-6 group overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-tr from-luxury-gold/5 via-transparent to-transparent animate-pulse" />
+                {/* Profile Avatar Background */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center rounded-full group-hover:scale-105 transition-transform duration-700 pointer-events-none" 
+                  style={{ backgroundImage: `url(${yomnaAvatar})` }} 
+                />
+                
+                {/* Luxury Dark Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-luxury-black via-luxury-black/70 to-luxury-black/35 rounded-full" />
+                
+                {/* Pulse background glow */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-luxury-gold/5 via-transparent to-transparent animate-pulse rounded-full pointer-events-none" />
                 
                 {/* Rotating drafting circular lines representing Architecture */}
                 <div className="absolute inset-2 rounded-full border border-dashed border-luxury-light/10 animate-spin" style={{ animationDuration: '60s' }} />
                 <div className="absolute inset-8 rounded-full border border-luxury-light/5 animate-spin" style={{ animationDuration: '40s', animationDirection: 'reverse' }} />
                 
-                <div className="relative text-center space-y-4">
+                <div className="relative text-center space-y-4 z-10">
                   <span className="font-outfit text-[11px] uppercase tracking-widest text-luxury-gold font-bold">
                     Portfolio Creative Design
                   </span>
@@ -466,18 +477,19 @@ export const Home: React.FC = () => {
             {t('contact.subtitle')}
           </p>
 
-          <div className="pt-6 flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <div className="pt-6 flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
-              href="mailto:info@bedayagroup.com"
-              className="px-8 py-3.5 bg-white text-luxury-black font-semibold text-sm uppercase tracking-widest hover:bg-luxury-gold transition-all duration-300 rounded-none shadow-lg shadow-white/5 cursor-pointer"
+              href="mailto:yomnamotawe@gmail.com"
+              className="px-8 py-3.5 bg-white text-luxury-black font-semibold text-sm tracking-widest hover:bg-luxury-gold hover:text-luxury-black transition-all duration-300 rounded-none shadow-lg shadow-white/5 cursor-pointer"
             >
-              info@bedayagroup.com
+              yomnamotawe@gmail.com
             </a>
             <a
-              href="tel:+201000000000"
-              className="text-white hover:text-luxury-gold font-bold text-sm uppercase tracking-widest transition-colors duration-300"
+              href="tel:+201015833927"
+              dir="ltr"
+              className="px-8 py-3.5 border border-white/20 text-white font-semibold text-sm uppercase tracking-widest hover:border-luxury-gold hover:text-luxury-gold transition-all duration-300 rounded-none cursor-pointer"
             >
-              +20 100 000 0000
+              +20 101 583 3927
             </a>
           </div>
         </div>

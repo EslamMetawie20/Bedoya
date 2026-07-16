@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Outfit', 'Tajawal', system-ui, -apple-system, sans-serif;
-  --font-outfit: 'Outfit', sans-serif;
-  --font-tajawal: 'Tajawal', sans-serif;
+  --font-sans: 'Outfit', 'IBM Plex Sans Arabic', system-ui, -apple-system, sans-serif;
+  --font-outfit: 'Outfit', 'IBM Plex Sans Arabic', sans-serif;
+  --font-arabic: 'IBM Plex Sans Arabic', sans-serif;
   
   --color-luxury-black: #000000;
   --color-luxury-dark: #0a0b0d;
@@ -28,7 +28,12 @@
   }
   
   html[lang="ar"] {
-    font-family: 'Tajawal', sans-serif;
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+  }
+  
+  /* Reset letter-spacing in Arabic to keep letters connected */
+  html[lang="ar"] * {
+    letter-spacing: 0 !important;
   }
   
   html[lang="en"] {

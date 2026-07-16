@@ -6,6 +6,7 @@ import { ArrowRight, Hammer, Paintbrush, Building, ArrowUpRight, GraduationCap }
 import projectsData from '../data/projects.json';
 import { PageTransition } from '../components/PageTransition';
 import { getImageUrl } from '../utils/image';
+import heroLogo from '../assets/brand/logo.png';
 
 // Reusable Counter component using requestAnimationFrame for smooth luxury numbers
 const Counter: React.FC<{ value: number; suffix?: string }> = ({ value, suffix = "" }) => {
@@ -55,6 +56,31 @@ export const Home: React.FC = () => {
   const heroOpacity = useTransform(scrollY, [0, 600], [1, 0]);
   const heroScale = useTransform(scrollY, [0, 800], [1, 1.05]);
 
+  // 3D Parallax Tilt state
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = e.currentTarget;
+    const rect = el.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left - width / 2;
+    const mouseY = e.clientY - rect.top - height / 2;
+    
+    // Max rotation 12 degrees
+    const rX = -(mouseY / (height / 2)) * 12;
+    const rY = (mouseX / (width / 2)) * 12;
+    
+    setRotateX(rX);
+    setRotateY(rY);
+  };
+
+  const handleMouseLeave = () => {
+    setRotateX(0);
+    setRotateY(0);
+  };
+
   return (
     <PageTransition>
       {/* 1. CINEMATIC HERO */}
@@ -69,25 +95,38 @@ export const Home: React.FC = () => {
 
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto space-y-8">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center gap-2 px-3 py-1 border border-luxury-gold/30 rounded-full bg-luxury-gold/5"
+            initial={{ opacity: 0, scale: 0.85, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ perspective: 1000 }}
+            className="relative flex justify-center items-center pt-10 pb-6 sm:pt-14 sm:pb-6 md:pt-18 md:pb-6 max-w-full cursor-pointer"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-luxury-gold animate-pulse" />
-            <span className="text-[10px] md:text-xs uppercase tracking-widest text-luxury-gold font-medium font-outfit">
-              {i18n.language === 'ar' ? 'بداية للمقاولات العامة والتطوير' : 'Bedaya Constructions'}
-            </span>
-          </motion.div>
+            {/* BACKLIT LUXURY GLOW */}
+            <div className="absolute w-[20rem] h-[20rem] sm:w-[26rem] sm:h-[26rem] md:w-[32rem] md:h-[32rem] lg:w-[40rem] lg:h-[40rem] bg-gradient-to-tr from-luxury-gold/15 via-white/5 to-transparent rounded-full blur-[100px] pointer-events-none -z-10" />
 
-          <motion.h1
-            initial={{ opacity: 0, letterSpacing: '-0.05em' }}
-            animate={{ opacity: 1, letterSpacing: '0em' }}
-            transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl md:text-6xl lg:text-8xl font-light tracking-tight text-white leading-[1.1] md:leading-[1.05]"
-          >
-            {t('hero.title')}
-          </motion.h1>
+            <motion.img
+              src={heroLogo}
+              alt="Bedaya Constructions & Development Logo"
+              animate={{ 
+                y: [0, -8, 0],
+                rotateX: rotateX,
+                rotateY: rotateY
+              }}
+              transition={{ 
+                y: { repeat: Infinity, duration: 6, ease: "easeInOut" },
+                rotateX: { type: "spring", stiffness: 150, damping: 20 },
+                rotateY: { type: "spring", stiffness: 150, damping: 20 }
+              }}
+              whileHover={{ scale: 1.05 }}
+              style={{
+                filter: 'drop-shadow(0 0 20px rgba(254, 127, 45, 0.55)) drop-shadow(0 0 4px rgba(254, 127, 45, 0.35))',
+                transformStyle: "preserve-3d"
+              }}
+              className="w-auto h-[7.5rem] sm:h-[10.5rem] md:h-[13.5rem] lg:h-[16.5rem] xl:h-[19.5rem] max-w-[95vw] object-contain pointer-events-none"
+            />
+          </motion.div>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
